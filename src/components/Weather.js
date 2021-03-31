@@ -1,103 +1,98 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import { Link } from 'react-router-dom';
 import CityForm from "./CityForm";
-import { Title } from "./modules/Title";
+import { StyledDay, StyledH3, StyledWeekDay } from "./modules/Titles";
+import { StyledMain, Section, Cards, Card, HeroArticle, TitlePart } from "./modules/Sections"
+import { data } from '../data1.js'
+import { ReactComponent as CityTwoColor } from '../CityTwoColor.svg'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchWeather, weatherSelector } from '../slices/weather'
 
 const Weather = () => {
-  const apiUrl = "https://api.openweathermap.org/data/2.5/";
-  const apiKey = process.env.REACT_APP_KEY;
+  const dispatch = useDispatch()
+  const { weather, loading, hasErrors } = useSelector(weatherSelector)
+  console.log('Weather: ', weather)
 
-  const [weather, setWeather] = useState([{}]);
   const [query, setQuery] = useState("Suwałki");
 
-  useEffect(() => {
-    getWeather();
-  }, []);
 
-  const getWeather = async () => {
-    try {
-      const response = await fetch(
-        `${apiUrl}forecast?q=${query}&units=metric&APPID=${apiKey}`
-      );
-      const data = await response.json();
-      console.log(data);
-      const weather = await data.list;
-      console.log(weather);
-      setWeather(weather);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    dispatch(fetchWeather())
+  }, [dispatch])
+
+
+  const renderWeatherCards = () => {
+    if (loading) return <p style={{ color: "white" }}>Loading weather cards...</p>
+
+    if (hasErrors) return <div style={{ color: "white", height: "100vh" }}> Cannot display weather cards...</div>
+
+
+    return weather.filter((filteredItem) => filteredItem.dt_txt.includes("15:00:00")).map(item =>
+      <Link to="/day" style={{ textDecoration: "none" }}>
+        <Card key={item.dt_txt} onClick={openDayPage}>
+          <div style={{ display: "flex", flexDirection: "row", alignItems: "baseline", justifyContent: "space-between" }}>
+            <StyledWeekDay>
+              {new Date(item.dt_txt.slice(0, 10)).toLocaleDateString("default", { weekday: 'short' })}
+            </StyledWeekDay>
+            <StyledDay>
+              {new Date(item.dt_txt).toLocaleDateString("default", { month: 'short' })}, {new Date(item.dt_txt).getDate()}
+            </StyledDay>
+          </div>
+
+
+          <p style={{ color: "#3e8797", fontSize: "2.5rem", marginTop: "0", marginBottom: "1rem" }}>{Math.floor(item.main.temp_max)}&deg; C</p>
+          <img style={{ width: "80px", height: "80px" }}
+            src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`}
+            alt={`icon-${item.weather[0].icon}`}
+          />
+          <p style={{ color: "rgb(36, 40, 91)", fontSize: "1.2rem" }}>{item.weather[0].description}</p>
+
+        </Card>
+      </Link>
+
+
+    )
+
+
+  }
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(query);
-    setQuery("");
   };
+
+  const openDayPage = () => {
+    console.log("day component")
+  }
 
   return (
     <StyledMain>
       <Section>
-        <CityForm
-          onSubmit={handleSubmit}
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <Title>City: {query} </Title>
-        <Cards>
-          {weather
-            .filter((item) => item.dt_txt.includes("15:00:00"))
-            .map((filteredItem) => {
-              console.log(filteredItem);
-              const { temp_max } = filteredItem.main;
-              const { icon, description } = filteredItem.weather[0];
-              const { dt_txt } = filteredItem;
+        <HeroArticle >
+          <TitlePart>
+            <StyledH3 >Weather forecast for your city</StyledH3>
+            <CityForm
+              onSubmit={handleSubmit}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </TitlePart>
 
-              return (
-                <Card>
-                  {dt_txt.slice(0, 10)}
-                  <p>{Math.floor(temp_max)}&deg; C</p>
-                  <img
-                    src={`http://openweathermap.org/img/w/${icon}.png`}
-                    alt={`icon-${icon}`}
-                  />
-                  <p>{description}</p>
-                </Card>
-              );
-            })}
-        </Cards>
+          <CityTwoColor style={{ height: "400px", width: "auto", marginLeft: 0 }} />
+        </HeroArticle>
       </Section>
+      <Cards>
+        {renderWeatherCards()}
+
+      </Cards>
+
     </StyledMain>
   );
 };
 
-const StyledMain = styled.main`
-  padding: 5%;
-  margin: 0 auto;
-`;
 
-const Section = styled.section`
-  margin: 0 auto;
-  text-align: center;
-`;
 
-const Cards = styled.section`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  padding: 5%;
-`;
-
-const Card = styled.article`
-  margin: 2.5rem;
-  padding: 1rem;
-  border-radius: 5px;
-  border: 0;
-  box-shadow: 2px 2px 2px 2 px rgba(0, 0, 0, 0.5);
-  width: 200px;
-  align-items: center;
-  justify-content: space-around;
-`;
 
 export default Weather;

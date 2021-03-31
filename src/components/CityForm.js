@@ -1,7 +1,7 @@
 import React from "react";
 import StyledForm from "./modules/StyledForm";
 
-const CityForm = ({ onSubmit, onChange, value }) => {
+const CityForm = ({ onSubmit, onChange, value, placeholder }) => {
   return (
     <StyledForm
       city="City"
@@ -9,6 +9,7 @@ const CityForm = ({ onSubmit, onChange, value }) => {
       onSubmit={onSubmit}
       onChange={onChange}
       value={value}
+      placeholder={placeholder}
     />
   );
 };
