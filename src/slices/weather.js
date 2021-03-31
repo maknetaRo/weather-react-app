@@ -26,6 +26,7 @@ const weatherSlice = createSlice({
     }
 })
 
+
 export const { getWeather, getWeatherSuccess, getWeatherFailure } = weatherSlice.actions
 
 export const weatherSelector = state => state.weather
