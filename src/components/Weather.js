@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import CityForm from "./CityForm";
 import { StyledDay, StyledH3, StyledWeekDay } from "./modules/Titles";
 import { StyledMain, Section, Cards, Card, HeroArticle, TitlePart } from "./modules/Sections"
-import { data } from '../data1.js'
+import { StyledTemp, StyledWeatherIcon, StyledWeatherDescription, StyledDateRow } from './modules/StyledCard'
 import { ReactComponent as CityTwoColor } from '../CityTwoColor.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchWeather, weatherSelector } from '../slices/weather'
@@ -30,22 +30,22 @@ const Weather = () => {
     return weather.filter((filteredItem) => filteredItem.dt_txt.includes("15:00:00")).map(item =>
       <Link to="/day" style={{ textDecoration: "none" }}>
         <Card key={item.dt_txt} onClick={openDayPage}>
-          <div style={{ display: "flex", flexDirection: "row", alignItems: "baseline", justifyContent: "space-between" }}>
+          <StyledDateRow >
             <StyledWeekDay>
               {new Date(item.dt_txt.slice(0, 10)).toLocaleDateString("default", { weekday: 'short' })}
             </StyledWeekDay>
             <StyledDay>
               {new Date(item.dt_txt).toLocaleDateString("default", { month: 'short' })}, {new Date(item.dt_txt).getDate()}
             </StyledDay>
-          </div>
+          </StyledDateRow>
 
 
-          <p style={{ color: "#3e8797", fontSize: "2.5rem", marginTop: "0", marginBottom: "1rem" }}>{Math.floor(item.main.temp_max)}&deg; C</p>
-          <img style={{ width: "80px", height: "80px" }}
+          <StyledTemp>{Math.floor(item.main.temp_max)}&deg; C</StyledTemp>
+          <StyledWeatherIcon
             src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`}
             alt={`icon-${item.weather[0].icon}`}
           />
-          <p style={{ color: "rgb(36, 40, 91)", fontSize: "1.2rem" }}>{item.weather[0].description}</p>
+          <StyledWeatherDescription>{item.weather[0].description}</StyledWeatherDescription>
 
         </Card>
       </Link>
