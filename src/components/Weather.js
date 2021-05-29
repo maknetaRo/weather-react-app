@@ -23,7 +23,6 @@ import { fetchWeather, weatherSelector } from '../slices/weather';
 const Weather = () => {
   const dispatch = useDispatch();
   const { weather, loading, hasErrors } = useSelector(weatherSelector);
-  console.log('Weather: ', weather);
 
   const [query, setQuery] = useState('Suwałki');
 
@@ -38,12 +37,10 @@ const Weather = () => {
     if (hasErrors)
       return (
         <div style={{ color: 'white', height: '100vh' }}>
-          {' '}
           Cannot display weather cards...
         </div>
       );
     const handleProps = (day) => {
-      console.log(day);
       return day;
     };
 
@@ -51,7 +48,6 @@ const Weather = () => {
       .filter((filteredItem) => filteredItem.dt_txt.includes('15:00:00'))
       .map((item) => {
         const { dt_txt } = item;
-        console.log(dt_txt);
         return (
           <Link
             to={{
@@ -64,7 +60,7 @@ const Weather = () => {
             onClick={() => handleProps({ dt_txt })}
             key={dt_txt}
           >
-            <Card onClick={openDayPage}>
+            <Card>
               <StyledDateRow>
                 <StyledWeekDay>
                   {new Date(dt_txt.slice(0, 10)).toLocaleDateString('default', {
@@ -96,10 +92,6 @@ const Weather = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(query);
-  };
-
-  const openDayPage = () => {
-    console.log('day component');
   };
 
   return (
