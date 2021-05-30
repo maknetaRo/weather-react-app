@@ -3,19 +3,28 @@ import { Link } from 'react-router-dom';
 import {
   StyledMain,
   Section,
-  HeroArticle,
+  HeroDay,
   TitlePart,
   Cards,
-  Card,
+  HourCard,
 } from './modules/Sections';
 import { StyledDay, StyledH3, StyledWeekDay } from './modules/Titles';
-import { StyledDateRow } from './modules/StyledCard';
+import {
+  StyledDayRow,
+  Hour,
+  StyledMinutes,
+  StyledDesc,
+  StyledWeatherIcon,
+  ImageBox,
+  StyledTemp,
+  PercentSpan,
+} from './modules/StyledCard';
 import { Button } from './modules/Buttons';
 import { ReactComponent as RainTwoColor } from '../Rain_Two_Color.svg';
 
 const Day = (props) => {
   if (!props.location.dayProps) {
-    return '';
+    return 'error...';
   }
   if (props.location.dayProps) {
     const { dt_txt, weather, loading, hasErrors, value } =
@@ -42,64 +51,25 @@ const Day = (props) => {
           const { icon, description } = item.weather[0];
           const { dt_txt } = item;
           return (
-            <Card
-              key={dt_txt}
-              style={{
-                width: '800px',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-              }}
-            >
-              <p
-                style={{
-                  color: '#ffd200',
-                  fontSize: '2.75rem',
-                  fontWeight: 'bold',
-                  display: 'flex',
-                }}
-              >
-                {dt_txt.slice(11, 13)}{' '}
-                <span style={{ fontSize: '2rem' }}>{dt_txt.slice(17)}</span>
-              </p>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <img
+            <HourCard key={dt_txt}>
+              <Hour>
+                {dt_txt.slice(11, 13)}
+                <StyledMinutes>{dt_txt.slice(17)}</StyledMinutes>
+              </Hour>
+              <ImageBox>
+                <StyledWeatherIcon
                   src={`http://openweathermap.org/img/w/${icon}.png`}
-                  style={{ width: '80%' }}
                 />
-                <p style={{ color: 'rgb(36, 40, 91)' }}>{description}</p>
-              </div>
+                <StyledDesc>{description}</StyledDesc>
+              </ImageBox>
 
-              <p
-                style={{
-                  color: '#3e8797',
-                  fontSize: '2.5rem',
-                  marginTop: '0',
-                  marginBottom: '1rem',
-                }}
-              >
-                {Math.floor(temp_max)}&deg; C
-              </p>
+              <StyledTemp>{Math.floor(temp_max)}&deg; C</StyledTemp>
 
-              <p>
-                Humidity:{' '}
-                <span
-                  style={{
-                    color: '#3e8797',
-                    fontSize: '1.2rem',
-                    paddingLeft: '0.25rem',
-                  }}
-                >
-                  {humidity}%
-                </span>
-              </p>
-            </Card>
+              <StyledDesc>
+                Humidity:
+                <PercentSpan>{humidity}%</PercentSpan>
+              </StyledDesc>
+            </HourCard>
           );
         });
     };
@@ -107,26 +77,13 @@ const Day = (props) => {
     return (
       <StyledMain>
         <Section>
-          <HeroArticle
-            style={{
-              paddingTop: '2rem',
-              flexDirection: 'row',
-              paddingLeft: '1rem',
-            }}
-          >
+          <HeroDay>
             <TitlePart>
               <StyledH3>
                 Every three hours weather forecast for your city:
               </StyledH3>
               <StyledH3 style={{ color: '#68e1fd' }}>{value}</StyledH3>
-              <StyledDateRow
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'baseline',
-                  justifyContent: 'flex-start',
-                }}
-              >
+              <StyledDayRow>
                 <StyledWeekDay>
                   {new Date(day.slice(0, 10)).toLocaleDateString('default', {
                     weekday: 'short',
@@ -138,12 +95,12 @@ const Day = (props) => {
                   })}
                   , {new Date(day).getDate()}
                 </StyledDay>
-              </StyledDateRow>
+              </StyledDayRow>
             </TitlePart>
             <RainTwoColor
               style={{ height: '350px', width: 'auto', marginLeft: 0 }}
             />
-          </HeroArticle>
+          </HeroDay>
         </Section>
         <Section>
           <Link to="/">
