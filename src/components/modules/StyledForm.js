@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { FormButton } from './Buttons'
+import styled from 'styled-components';
+import { FormButton } from './Buttons';
 const Input = styled.input`
   font-size: 1.1rem;
   padding: 0.75rem 0.45rem;
@@ -27,7 +27,7 @@ const Row = styled.div`
   margin: 0.5rem 0 1rem;
   width: 100%;
   padding-right: 2rem;
-  `;
+`;
 
 const Form = styled.form`
   position: relative;
@@ -44,12 +44,15 @@ const Form = styled.form`
 `;
 
 const StyledForm = (props) => {
-  console.log(props);
   return (
     <Form onSubmit={props.onSubmit}>
       <Label>{props.city}</Label>
       <Row>
-        <Input value={props.value} onChange={props.onChange} autoComplete="address-level2" />
+        <Input
+          value={props.value}
+          onChange={props.onChange}
+          autoComplete="address-level2"
+        />
         <FormButton>{props.submit}</FormButton>
       </Row>
     </Form>

@@ -17,17 +17,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchWeather, weatherSelector } from '../slices/weather';
 
 const Day = (props) => {
-  const dispatch = useDispatch();
-  const { weather, loading, hasErrors } = useSelector(weatherSelector);
+  // const dispatch = useDispatch();
+  // const { weather, loading, hasErrors } = useSelector(weatherSelector);
 
-  useEffect(() => {
-    dispatch(fetchWeather());
-  }, [dispatch]);
+  // const { dt_txt, apiUrl, apiKey, query } = props.location.dayProps;
+
+  // useEffect(() => {
+  //   dispatch(fetchWeather(apiUrl, apiKey, query));
+  // }, [apiUrl, apiKey, query]);
 
   if (!props.location.dayProps) return '';
   if (props.location.dayProps) {
-    const { dt_txt } = props.location.dayProps;
+    const { dt_txt, weather, loading, hasErrors } = props.location.dayProps;
     const day = dt_txt.slice(0, 10);
+    console.log(day);
+    console.log(weather);
 
     const rennderHourCards = () => {
       if (loading)

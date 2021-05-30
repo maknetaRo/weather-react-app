@@ -1,5 +1,5 @@
-import React from "react";
-import StyledForm from "./modules/StyledForm";
+import React from 'react';
+import StyledForm from './modules/StyledForm';
 
 const CityForm = ({ onSubmit, onChange, value, placeholder }) => {
   return (

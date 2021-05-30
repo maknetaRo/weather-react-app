@@ -19,16 +19,20 @@ import {
 import { ReactComponent as CityTwoColor } from '../CityTwoColor.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWeather, weatherSelector } from '../slices/weather';
+const { REACT_APP_WEATHER_API_KEY } = process.env;
 
 const Weather = () => {
   const dispatch = useDispatch();
   const { weather, loading, hasErrors } = useSelector(weatherSelector);
 
   const [query, setQuery] = useState('Suwałki');
+  const apiUrl = 'https://api.openweathermap.org/data/2.5/';
+  const apiKey = REACT_APP_WEATHER_API_KEY;
 
   useEffect(() => {
-    dispatch(fetchWeather());
-  }, [dispatch]);
+    dispatch(fetchWeather({ apiUrl, apiKey, query }));
+    console.log(query);
+  }, [apiUrl, apiKey, query]);
 
   const renderWeatherCards = () => {
     if (loading)
@@ -54,6 +58,9 @@ const Weather = () => {
               pathname: '/day',
               dayProps: {
                 dt_txt,
+                weather,
+                loading,
+                hasErrors,
               },
             }}
             style={{ textDecoration: 'none' }}
@@ -89,10 +96,11 @@ const Weather = () => {
       });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(query);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(query);
+  //   // setQuery(query);
+  // };
 
   return (
     <StyledMain>
@@ -101,7 +109,7 @@ const Weather = () => {
           <TitlePart>
             <StyledH3>Weather forecast for your city</StyledH3>
             <CityForm
-              onSubmit={handleSubmit}
+              onSubmit={(e) => e.preventDefault()}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
@@ -112,7 +120,7 @@ const Weather = () => {
           />
         </HeroArticle>
       </Section>
-      <Cards>{renderWeatherCards()}</Cards>
+      <Cards>{weather ? renderWeatherCards() : ''}</Cards>
     </StyledMain>
   );
 };
