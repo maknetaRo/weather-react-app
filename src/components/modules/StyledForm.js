@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FormButton } from './Buttons';
+
 const Input = styled.input`
   font-size: 1.1rem;
   padding: 0.75rem 0.45rem;
@@ -44,16 +45,22 @@ const Form = styled.form`
 `;
 
 const StyledForm = (props) => {
+  console.log(props);
   return (
-    <Form onSubmit={props.onSubmit}>
-      <Label>{props.city}</Label>
+    <Form onSubmit={props.onSubmit} id="city-form">
+      <Label>
+        {props.city}: {props.value}
+      </Label>
       <Row>
         <Input
           value={props.value}
           onChange={props.onChange}
           autoComplete="address-level2"
+          type="text"
         />
-        <FormButton>{props.submit}</FormButton>
+        <FormButton type="submit" form="city-form">
+          {props.submit}
+        </FormButton>
       </Row>
     </Form>
   );

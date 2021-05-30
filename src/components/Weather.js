@@ -24,6 +24,7 @@ const { REACT_APP_WEATHER_API_KEY } = process.env;
 const Weather = () => {
   const dispatch = useDispatch();
   const { weather, loading, hasErrors } = useSelector(weatherSelector);
+  const [value, setValue] = useState('Suwałki');
 
   const [query, setQuery] = useState('Suwałki');
   const apiUrl = 'https://api.openweathermap.org/data/2.5/';
@@ -61,6 +62,7 @@ const Weather = () => {
                 weather,
                 loading,
                 hasErrors,
+                value,
               },
             }}
             style={{ textDecoration: 'none' }}
@@ -96,11 +98,11 @@ const Weather = () => {
       });
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(query);
-  //   // setQuery(query);
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(query);
+    setQuery(value);
+  };
 
   return (
     <StyledMain>
@@ -109,9 +111,9 @@ const Weather = () => {
           <TitlePart>
             <StyledH3>Weather forecast for your city</StyledH3>
             <CityForm
-              onSubmit={(e) => e.preventDefault()}
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onSubmit={handleSubmit}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
             />
           </TitlePart>
 

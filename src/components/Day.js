@@ -13,25 +13,17 @@ import { StyledDateRow } from './modules/StyledCard';
 import { Button } from './modules/Buttons';
 import { ReactComponent as RainTwoColor } from '../Rain_Two_Color.svg';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchWeather, weatherSelector } from '../slices/weather';
-
 const Day = (props) => {
-  // const dispatch = useDispatch();
-  // const { weather, loading, hasErrors } = useSelector(weatherSelector);
-
-  // const { dt_txt, apiUrl, apiKey, query } = props.location.dayProps;
-
-  // useEffect(() => {
-  //   dispatch(fetchWeather(apiUrl, apiKey, query));
-  // }, [apiUrl, apiKey, query]);
-
-  if (!props.location.dayProps) return '';
+  if (!props.location.dayProps) {
+    return '';
+  }
   if (props.location.dayProps) {
-    const { dt_txt, weather, loading, hasErrors } = props.location.dayProps;
+    const { dt_txt, weather, loading, hasErrors, value } =
+      props.location.dayProps;
     const day = dt_txt.slice(0, 10);
     console.log(day);
     console.log(weather);
+    console.log(value);
 
     const rennderHourCards = () => {
       if (loading)
@@ -124,8 +116,9 @@ const Day = (props) => {
           >
             <TitlePart>
               <StyledH3>
-                Every three hours weather forecast for your city
+                Every three hours weather forecast for your city:
               </StyledH3>
+              <StyledH3 style={{ color: '#68e1fd' }}>{value}</StyledH3>
               <StyledDateRow
                 style={{
                   display: 'flex',
