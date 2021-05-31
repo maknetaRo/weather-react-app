@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   StyledMain,
@@ -30,9 +30,6 @@ const Day = (props) => {
     const { dt_txt, weather, loading, hasErrors, value } =
       props.location.dayProps;
     const day = dt_txt.slice(0, 10);
-    console.log(day);
-    console.log(weather);
-    console.log(value);
 
     const rennderHourCards = () => {
       if (loading)
@@ -50,6 +47,7 @@ const Day = (props) => {
           const { temp_max, humidity } = item.main;
           const { icon, description } = item.weather[0];
           const { dt_txt } = item;
+
           return (
             <HourCard key={dt_txt}>
               <Hour>
@@ -90,10 +88,10 @@ const Day = (props) => {
                   })}
                 </StyledWeekDay>
                 <StyledDay style={{ fontSize: '1.25rem', color: 'white' }}>
-                  {new Date(day).toLocaleDateString('default', {
+                  {new Date(day.slice(0, 10)).toLocaleDateString('default', {
                     month: 'short',
                   })}
-                  , {new Date(day).getDate()}
+                  , {new Date(day.slice(0, 10)).getDate()}
                 </StyledDay>
               </StyledDayRow>
             </TitlePart>

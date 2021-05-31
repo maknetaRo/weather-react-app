@@ -32,7 +32,6 @@ const Weather = () => {
 
   useEffect(() => {
     dispatch(fetchWeather({ apiUrl, apiKey, query }));
-    console.log(query);
   }, [apiUrl, apiKey, query]);
 
   const renderWeatherCards = () => {
@@ -77,10 +76,10 @@ const Weather = () => {
                   })}
                 </StyledWeekDay>
                 <StyledDay>
-                  {new Date(dt_txt).toLocaleDateString('default', {
+                  {new Date(dt_txt.slice(0, 10)).toLocaleDateString('default', {
                     month: 'short',
                   })}
-                  , {new Date(dt_txt).getDate()}
+                  , {new Date(dt_txt.slice(0, 10)).getDate()}
                 </StyledDay>
               </StyledDateRow>
 
@@ -100,7 +99,6 @@ const Weather = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(query);
     setQuery(value);
   };
 

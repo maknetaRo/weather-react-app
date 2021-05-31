@@ -45,7 +45,6 @@ const Form = styled.form`
 `;
 
 const StyledForm = (props) => {
-  console.log(props);
   return (
     <Form onSubmit={props.onSubmit} id="city-form">
       <Label>
