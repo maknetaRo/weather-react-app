@@ -56,7 +56,7 @@ const Day = (props) => {
               </Hour>
               <ImageBox>
                 <StyledWeatherIcon
-                  src={`http://openweathermap.org/img/w/${icon}.png`}
+                  src={`https://openweathermap.org/img/w/${icon}.png`}
                 />
                 <StyledDesc>{description}</StyledDesc>
               </ImageBox>

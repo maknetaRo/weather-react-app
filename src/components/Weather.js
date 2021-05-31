@@ -85,7 +85,7 @@ const Weather = () => {
 
               <StyledTemp>{Math.floor(item.main.temp_max)}&deg; C</StyledTemp>
               <StyledWeatherIcon
-                src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`}
+                src={`https://openweathermap.org/img/w/${item.weather[0].icon}.png`}
                 alt={`icon-${item.weather[0].icon}`}
               />
               <StyledWeatherDescription>
