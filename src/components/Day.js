@@ -83,12 +83,12 @@ const Day = (props) => {
               <StyledH3 style={{ color: '#68e1fd' }}>{value}</StyledH3>
               <StyledDayRow>
                 <StyledWeekDay>
-                  {new Date(day.slice(0, 10)).toLocaleDateString('default', {
+                  {new Date(day.slice(0, 10)).toLocaleDateString('en-US', {
                     weekday: 'short',
                   })}
                 </StyledWeekDay>
                 <StyledDay style={{ fontSize: '1.25rem', color: 'white' }}>
-                  {new Date(day.slice(0, 10)).toLocaleDateString('default', {
+                  {new Date(day.slice(0, 10)).toLocaleDateString('en-US', {
                     month: 'short',
                   })}
                   , {new Date(day.slice(0, 10)).getDate()}

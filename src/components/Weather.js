@@ -71,12 +71,12 @@ const Weather = () => {
             <Card>
               <StyledDateRow>
                 <StyledWeekDay>
-                  {new Date(dt_txt.slice(0, 10)).toLocaleDateString('default', {
+                  {new Date(dt_txt.slice(0, 10)).toLocaleDateString('en-US', {
                     weekday: 'short',
                   })}
                 </StyledWeekDay>
                 <StyledDay>
-                  {new Date(dt_txt.slice(0, 10)).toLocaleDateString('default', {
+                  {new Date(dt_txt.slice(0, 10)).toLocaleDateString('en-US', {
                     month: 'short',
                   })}
                   , {new Date(dt_txt.slice(0, 10)).getDate()}
