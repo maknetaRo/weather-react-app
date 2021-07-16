@@ -116,7 +116,7 @@ const Weather = () => {
           </TitlePart>
 
           <CityTwoColor
-            style={{ height: '400px', width: 'auto', marginLeft: 0 }}
+            style={{ height: '400px', width: '100%', marginLeft: 0 }}
           />
         </HeroArticle>
       </Section>
