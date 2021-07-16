@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Button = styled.button`
- font-size: 1.1rem;
-  padding: 0.75rem 1.25rem;
+  font-size: 1.1rem;
+  padding: 0.75rem 1.25rem 0.75rem 0.75rem;
   outline: transparent;
   border: 1px solid #68e1fd;
   background: #68e1fd;
@@ -12,9 +12,7 @@ export const Button = styled.button`
   letter-spacing: 2px;
 `;
 
-export const FormButton = styled(Button)` 
-  border-radius: 0 5px 5px 0; 
+export const FormButton = styled(Button)`
+  border-radius: 0 5px 5px 0;
   width: 35%;
 `;
-
-

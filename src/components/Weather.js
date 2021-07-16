@@ -9,6 +9,7 @@ import {
   Card,
   HeroArticle,
   TitlePart,
+  ImagePart,
 } from './modules/Sections';
 import {
   StyledTemp,
@@ -32,7 +33,7 @@ const Weather = () => {
 
   useEffect(() => {
     dispatch(fetchWeather({ apiUrl, apiKey, query }));
-  }, [apiUrl, apiKey, query]);
+  }, [dispatch, apiUrl, apiKey, query]);
 
   const renderWeatherCards = () => {
     if (loading)
@@ -114,10 +115,17 @@ const Weather = () => {
               onChange={(e) => setValue(e.target.value)}
             />
           </TitlePart>
-
-          <CityTwoColor
-            style={{ height: '400px', width: '100%', marginLeft: 0 }}
-          />
+          <ImagePart>
+            <CityTwoColor
+              style={{
+                height: '400px',
+                width: 'auto',
+                margin: '0 2rem',
+                padding: '0 2rem',
+              }}
+            />
+          </ImagePart>
+          {/*<CityTwoColor style={{ height: '100%', width: 'auto' }} />*/}
         </HeroArticle>
       </Section>
       <Cards>{weather ? renderWeatherCards() : ''}</Cards>
