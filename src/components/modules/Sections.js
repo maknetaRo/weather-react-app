@@ -77,11 +77,12 @@ export const TitlePart = styled.div`
 
 export const ImagePart = styled.div`
   max-width: calc(700px - 10%);
-  height: 450px;
+  max-height: 450px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding-left: 2rem;
+  margin-left: 0;
 
   @media (max-width: 480px) {
     margin: 0 auto;
