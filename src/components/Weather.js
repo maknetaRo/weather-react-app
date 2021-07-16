@@ -119,7 +119,8 @@ const Weather = () => {
             <CityTwoColor
               style={{
                 height: '400px',
-                minWidth: '350px',
+                minWidth: '400px',
+                width: '85%',
               }}
             />
           </ImagePart>

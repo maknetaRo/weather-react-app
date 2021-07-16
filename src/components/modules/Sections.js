@@ -73,6 +73,7 @@ export const TitlePart = styled.div`
   margin-top: 5rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  flex: 1 1 auto;
 `;
 
 export const ImagePart = styled.div`
@@ -83,6 +84,7 @@ export const ImagePart = styled.div`
   align-items: center;
   padding-left: 2rem;
   margin-left: 0;
+  flex: 1 1 auto;
 
   @media (max-width: 480px) {
     margin: 0 auto;
