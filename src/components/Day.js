@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 import {
   StyledMain,
   Section,
@@ -73,40 +74,43 @@ const Day = (props) => {
     };
 
     return (
-      <StyledMain>
-        <Section>
-          <HeroDay>
-            <TitlePart>
-              <StyledH3>
-                Every three hours weather forecast for your city:
-              </StyledH3>
-              <StyledH3 style={{ color: '#68e1fd' }}>{value}</StyledH3>
-              <StyledDayRow>
-                <StyledWeekDay>
-                  {new Date(day.slice(0, 10)).toLocaleDateString('en-US', {
-                    weekday: 'short',
-                  })}
-                </StyledWeekDay>
-                <StyledDay style={{ fontSize: '1.25rem', color: 'white' }}>
-                  {new Date(day.slice(0, 10)).toLocaleDateString('en-US', {
-                    month: 'short',
-                  })}
-                  , {new Date(day.slice(0, 10)).getDate()}
-                </StyledDay>
-              </StyledDayRow>
-            </TitlePart>
-            <RainTwoColor
-              style={{ height: '350px', width: 'auto', marginLeft: 0 }}
-            />
-          </HeroDay>
-        </Section>
-        <Section>
-          <Link to="/">
-            <Button>Back</Button>
-          </Link>
-        </Section>
-        <Cards>{rennderHourCards()}</Cards>
-      </StyledMain>
+      <React.Fragment>
+        <StyledMain>
+          <Section>
+            <HeroDay>
+              <TitlePart>
+                <StyledH3>
+                  Every three hours weather forecast for your city:
+                </StyledH3>
+                <StyledH3 style={{ color: '#68e1fd' }}>{value}</StyledH3>
+                <StyledDayRow>
+                  <StyledWeekDay>
+                    {new Date(day.slice(0, 10)).toLocaleDateString('en-US', {
+                      weekday: 'short',
+                    })}
+                  </StyledWeekDay>
+                  <StyledDay style={{ fontSize: '1.25rem', color: 'white' }}>
+                    {new Date(day.slice(0, 10)).toLocaleDateString('en-US', {
+                      month: 'short',
+                    })}
+                    , {new Date(day.slice(0, 10)).getDate()}
+                  </StyledDay>
+                </StyledDayRow>
+              </TitlePart>
+              <RainTwoColor
+                style={{ height: '350px', width: 'auto', marginLeft: 0 }}
+              />
+            </HeroDay>
+          </Section>
+          <Section>
+            <Link to="/">
+              <Button>Back</Button>
+            </Link>
+          </Section>
+          <Cards>{rennderHourCards()}</Cards>
+        </StyledMain>
+        <Footer />
+      </React.Fragment>
     );
   }
 };

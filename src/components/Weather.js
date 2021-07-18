@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CityForm from './CityForm';
+import Footer from './Footer';
 import { StyledDay, StyledH3, StyledWeekDay } from './modules/Titles';
 import {
   StyledMain,
@@ -104,31 +105,33 @@ const Weather = () => {
   };
 
   return (
-    <StyledMain>
-      <Section>
-        <HeroArticle>
-          <TitlePart>
-            <StyledH3>Weather forecast for your city</StyledH3>
-            <CityForm
-              onSubmit={handleSubmit}
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-            />
-          </TitlePart>
-          <ImagePart>
-            <CityTwoColor
-              style={{
-                height: '400px',
-                minWidth: '400px',
-                width: '85%',
-              }}
-            />
-          </ImagePart>
-          {/*<CityTwoColor style={{ height: '100%', width: 'auto' }} />*/}
-        </HeroArticle>
-      </Section>
-      <Cards>{weather ? renderWeatherCards() : ''}</Cards>
-    </StyledMain>
+    <React.Fragment>
+      <StyledMain>
+        <Section>
+          <HeroArticle>
+            <TitlePart>
+              <StyledH3>Weather forecast for your city</StyledH3>
+              <CityForm
+                onSubmit={handleSubmit}
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+              />
+            </TitlePart>
+            <ImagePart>
+              <CityTwoColor
+                style={{
+                  height: '400px',
+                  minWidth: '400px',
+                  width: '85%',
+                }}
+              />
+            </ImagePart>
+          </HeroArticle>
+        </Section>
+        <Cards>{weather ? renderWeatherCards() : ''}</Cards>
+      </StyledMain>
+      <Footer />
+    </React.Fragment>
   );
 };
 
