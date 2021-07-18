@@ -1,7 +1,7 @@
-import "./App.css";
-import Weather from "./components/Weather";
-import Day from './components/Day'
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import './App.css';
+import Weather from './components/Weather';
+import Day from './components/Day';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -11,8 +11,6 @@ function App() {
         <Route exact path="/day" component={Day} />
       </div>
     </Router>
-
-
   );
 }
 

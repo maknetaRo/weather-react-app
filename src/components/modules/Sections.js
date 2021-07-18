@@ -6,7 +6,7 @@ export const StyledMain = styled.main`
   max-width: 1440px;
   padding: 0;
   margin: 0 auto;
-  padding-bottom: 7rem;
+  padding-bottom: 4rem;
   min-height: 100vh;
 `;
 
